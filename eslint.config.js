@@ -6,5 +6,9 @@ module.exports = defineConfig([
   expoConfig,
   {
     ignores: ['dist/*'],
+    plugins:['import'],
+    extends:[
+      'plugin:import/recommended'
+    ]
   },
 ]);
