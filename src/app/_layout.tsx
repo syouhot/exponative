@@ -1,20 +1,27 @@
-import { Stack } from 'expo-router';
+import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useCallback } from 'react';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+// SplashScreen.preventAutoHideAsync()
 
-const App = ()=>{
+const App = () => {
+
+  const handleTrackPlayerLoaded = useCallback(() => {
+    SplashScreen.hideAsync()
+  }, [])
+ 
   return <SafeAreaProvider>
     <RootNavigation />
-    <StatusBar style='light'/>
+    <StatusBar style='light' />
   </SafeAreaProvider>
 }
 
 
-const RootNavigation = ()=>{
+const RootNavigation = () => {
   return <Stack>
-    <Stack.Screen name="(tabs)" options={{headerShown:false,headerTitleAlign:"center"}} />
+    <Stack.Screen name="(tabs)" options={{ headerShown: false, headerTitleAlign: "center" }} />
   </Stack>
 }
 

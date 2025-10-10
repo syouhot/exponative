@@ -4,9 +4,10 @@ import { defaultStyle } from '@/styles'
 import { Image } from 'expo-image'
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { Track } from 'react-native-track-player'
 
 export type TrackListItemProps = {
-    track: { title: string, image?: string, artist?: string }
+    track: Track
 }
 
 export default function TrackListItem({ track }: TrackListItemProps) {
@@ -18,7 +19,7 @@ export default function TrackListItem({ track }: TrackListItemProps) {
                 <View style={{ flexDirection: 'row', alignItems: 'center',columnGap:14 }}>
                     <View>
                         <Image source={{
-                            uri: track.image || unknownTrackImageUri,
+                            uri: track.artwork || unknownTrackImageUri,
                         }}
                             style={{
                                 ...styles.trackArtworkImage,

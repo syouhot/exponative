@@ -8,7 +8,7 @@ module.exports = defineConfig([
     ignores: ['dist/*'],
     plugins:['import'],
     extends:[
-      'plugin:import/recommended'
+      // 'plugin:import/recommended'
     ]
   },
 ]);

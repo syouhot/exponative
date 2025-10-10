@@ -1,15 +1,18 @@
 import { ExtendedStackNavigationOptions } from "expo-router/build/layouts/StackClient"
+import { Platform } from "react-native"
 import { colors } from "./theme"
-export const StackScreenWithSeachBar:ExtendedStackNavigationOptions = {
-    headerLargeTitle:true,
-    headerLargeStyle:{
-        backgroundColor:colors.background,
+export const StackScreenWithSeachBar: ExtendedStackNavigationOptions = {
+
+    headerLargeStyle: {
+        backgroundColor: colors.background,
     },
-    headerLargeTitleStyle:{
-        color:colors.text,
+    headerLargeTitleStyle: {
+        color: colors.text,
     },
-    headerTintColor:colors.text,
-    headerTransparent:true,
-    headerBlurEffect:"prominent",
-    headerShadowVisible:false,
+    headerTintColor: colors.text,
+
+    headerBlurEffect: "prominent",
+    headerShadowVisible: false,
+    ...(Platform.OS === 'ios' ? { headerTitle: "Songs", headerTitleAlign: "center", headerLargeTitle: true, headerTransparent: true, } : {headerShown:false}
+    )
 }
