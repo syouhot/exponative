@@ -16,11 +16,19 @@ export default function SongsScreen() {
         if (!searchValue) return library
         return library.filter(trackTitleFilter(searchValue))
     }, [searchValue])
+    if (Platform.OS === "ios") return (
+        <ScrollView style={defaultStyle.container} contentInsetAdjustmentBehavior="automatic">
+            <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} />
+            <View 
+                style={{ paddingHorizontal: screenPadding.horizontal }}>
+                <TracksList scrollEnabled={false} tracks={filteredTracks} />
+            </View>
+        </ScrollView>
+    )
     return <View style={defaultStyle.container}>
-        {Platform.OS === "ios" ? null : <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} />}
+        <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} />
         <ScrollView contentInsetAdjustmentBehavior="automatic"
             style={{ paddingHorizontal: screenPadding.horizontal }}>
-            {Platform.OS === "ios" ? <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} /> : null}
             <TracksList scrollEnabled={false} tracks={filteredTracks} />
         </ScrollView>
     </View>

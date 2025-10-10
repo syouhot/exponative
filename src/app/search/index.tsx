@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     zIndex: 2,
     height: 40,
-    paddingVertical:10
+    marginVertical:10
   },
   searchView: {
     height: 40,
@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     borderColor: '#1d1c1e',
     borderWidth: 1,
     borderRadius: 8,
+    width:"90%"
   },
   searchInput: {
     height: 40,

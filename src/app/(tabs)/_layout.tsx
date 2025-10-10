@@ -26,14 +26,20 @@ export default function TabsNavigation() {
       borderTopRightRadius: 20,
       borderTopWidth: 0,
       paddingTop: 8,
-      height: 60,
+      height: 70,
     },
-    tabBarBackground: () => <BlurView intensity={25} style={[{
+    tabBarBackground: () => <BlurView intensity={40} style={{
       ...StyleSheet.absoluteFillObject,
       overflow: "hidden",
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
-    }, Platform.OS === "ios" ? {} : { backgroundColor: "#1c1c1c", }]} />,
+      ...Platform.select({
+        android:{
+          backgroundColor: "#1c1c1c"
+
+        }
+      })
+    }} />,
   }}>
     <Tabs.Screen name="favorites" options={{
       title: "Favorites",

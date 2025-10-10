@@ -6,7 +6,7 @@ import { View } from "react-native";
 export default function SongsScreenLayout({ children }: { children: React.ReactNode }){
     return <View style={defaultStyle.container}>
         <Stack>
-            <Stack.Screen name="index" options={{...StackScreenWithSeachBar}}/>
+            <Stack.Screen name="index" options={{...StackScreenWithSeachBar, headerTitle:"Songs",headerTitleAlign:"center"}}/>
         </Stack>
     </View>
 } 

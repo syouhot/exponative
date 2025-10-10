@@ -10,9 +10,19 @@ export const StackScreenWithSeachBar: ExtendedStackNavigationOptions = {
         color: colors.text,
     },
     headerTintColor: colors.text,
-
-    headerBlurEffect: "prominent",
+    headerTitleStyle:{
+        color:"white"
+    },
     headerShadowVisible: false,
-    ...(Platform.OS === 'ios' ? { headerTitle: "Songs", headerTitleAlign: "center", headerLargeTitle: true, headerTransparent: true, } : {headerShown:false}
-    )
+    headerBlurEffect: "dark",
+    ...Platform.select({
+        ios: {
+            headerLargeTitle: true, 
+            headerTransparent: true,
+        },
+        android: {
+            headerShown: false
+        }
+    })
+
 }
