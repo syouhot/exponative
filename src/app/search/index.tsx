@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     paddingLeft: 40, // 左侧留出图标空间
     paddingRight: 15,
     color: "#fff",
-    width: "90%",
+    width: "100%",
   },
   icon: {
     position: 'absolute',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   clearButton: {
     position: 'absolute',
-    right: 5,
+    right: 10,
     zIndex: 1,
   },
 })

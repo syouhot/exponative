@@ -1,3 +1,4 @@
+import ContextProvider from '@/context';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback } from 'react';
@@ -11,10 +12,12 @@ const App = () => {
   const handleTrackPlayerLoaded = useCallback(() => {
     SplashScreen.hideAsync()
   }, [])
- 
+
   return <SafeAreaProvider>
-    <RootNavigation />
-    <StatusBar style='light' />
+    <ContextProvider>
+      <RootNavigation />
+      <StatusBar style='light' />
+    </ContextProvider>
   </SafeAreaProvider>
 }
 
