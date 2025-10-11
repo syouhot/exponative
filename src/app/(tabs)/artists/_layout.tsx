@@ -1,12 +1,9 @@
 import { StackScreenWithSeachBar } from "@/constants/layout";
-import { defaultStyle } from "@/styles";
 import { Stack } from "expo-router";
-import { View } from "react-native";
 
 export default function ArtistsScreenLayout({ children }: { children: React.ReactNode }){
-    return <View style={defaultStyle.container}>
-        <Stack>
+    return <Stack>
             <Stack.Screen name="index" options={{...StackScreenWithSeachBar, headerTitle:"artists",headerTitleAlign:"center"}}/>
         </Stack>
-    </View>
+
 } 

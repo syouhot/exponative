@@ -4,7 +4,7 @@ import { colors } from "./theme"
 export const StackScreenWithSeachBar: ExtendedStackNavigationOptions = {
 
     headerLargeStyle: {
-        backgroundColor: colors.background,
+        // backgroundColor: colors.background,//如果使用大标题,这里如果添加了背景颜色,则大标题失效
     },
     headerLargeTitleStyle: {
         color: colors.text,
@@ -14,7 +14,7 @@ export const StackScreenWithSeachBar: ExtendedStackNavigationOptions = {
         color:"white"
     },
     headerShadowVisible: false,
-    headerBlurEffect: "dark",
+    headerBlurEffect: "none",//添加效果后大标题失效
     ...Platform.select({
         ios: {
             headerLargeTitle: true, 
