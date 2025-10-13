@@ -11,9 +11,11 @@
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": [
+          "audio",
           "audio"
         ]
-      }
+      },
+      "bundleIdentifier": "com.syouhot.exponative"
     },
     "android": {
       "adaptiveIcon": {
