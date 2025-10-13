@@ -1,5 +1,6 @@
 
 import { colors } from "@/constants/theme";
+import useTrackPlayerRepeatMode from "@/hooks/useTrackPlayerRepeatMode";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ComponentProps } from "react";
 
@@ -14,12 +15,16 @@ const repeatOrder = [
     "repeat"
 ] as const
 export default function PlayerRepeatToggle({ ...iconProps }: IconProps) {
-    const repeatMode = useTrackPlayerRepeatMode()
+    const {repeatMode ,changeRepeatMode } = useTrackPlayerRepeatMode()
+
+    const toggleRepeatMode = () => {
+        if(repeatMode === undefined) return
+        changeRepeatMode(repeatMode?0:1)
+    }
     const icon = match(repeatMode)
         .returnType<IconName>()
         .with(0, () => "repeat-off")
         .with(1, () => "repeat-once")
-        .with(2, () => "repeat")
         .otherwise(() => "repeat-off")
 
     return <MaterialCommunityIcons

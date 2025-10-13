@@ -6,15 +6,18 @@ import PlayerVolumeBar from "@/components/PlayerVolumeBar";
 import { unknownTrackImageUri } from "@/constants/images";
 import { colors, fontSize, screenPadding } from "@/constants/theme";
 import { useGlobalContext } from "@/context";
+import usePlayerBackground from "@/hooks/usePlayerBackground";
 import { defaultStyle, utilsStyles } from "@/styles";
 import { FontAwesome } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function PlayerScreen() {
     const { activeTrack } = useGlobalContext()
     const { top, bottom } = useSafeAreaInsets()
+    const { imageColors } = usePlayerBackground(activeTrack?.artwork ?? unknownTrackImageUri)
     const isFavorite = false
 
     const toggleFavorite = () => {
@@ -26,44 +29,46 @@ export default function PlayerScreen() {
         </View>
     }
 
-    return <View style={styles.overlayContainer}>
-        <DismissPlayerSymbol />
-        <View style={{ flex: 1, marginTop: top + 70, marginBottom: bottom + 20 }}>
-            <View style={styles.artworkImageContainer}>
-                <Image source={activeTrack.artwork ?? unknownTrackImageUri} style={styles.artworkImage} />
-            </View>
-            <View style={{ flex: 1 }}>
-                <View style={{ marginTop: "auto" }}>
-                    <View style={{ height: 60 }}>
-                        <View style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            alignItems: "center"
-                        }}>
-                            <View style={styles.trackTitleContainer}>
-                                <MovingText text={activeTrack.title ?? ""} style={styles.trackTitleText} animationThreshold={30} />
-                            </View>
-                            <FontAwesome
-                                name={isFavorite ? "heart" : "heart-o"}
-                                size={20}
-                                color={isFavorite ? colors.primary : colors.icon}
-                                style={{ marginHorizontal: 14 }}
-                                onPress={toggleFavorite} />
-                        </View>
-                        {activeTrack.artist && (
-                            <Text numberOfLines={1} style={[styles.artckArtistText, { marginTop: 6 }]}>{activeTrack.artist}</Text>
-                        )}
-                    </View>
-                    <PlayerProgressBar style={{ marginTop: 32 }} />
-                    <PlayerControls style={{ marginTop: 40 }} />
+    return <LinearGradient style={{ flex: 1 }} colors={imageColors ? [imageColors.background, imageColors.primary] : [colors.background, colors.background]}>
+        <View style={styles.overlayContainer}>
+            <DismissPlayerSymbol />
+            <View style={{ flex: 1, marginTop: top + 70, marginBottom: bottom + 20 }}>
+                <View style={styles.artworkImageContainer}>
+                    <Image source={activeTrack.artwork ?? unknownTrackImageUri} style={styles.artworkImage} />
                 </View>
-                <PlayerVolumeBar style={{ marginTop: "auto", marginBottom: 30 }} />
-                <View style={utilsStyles.centeredRow}>
-                    <PlayerRepeatToggle size={30} style={{ marginBottom: 6 }} />
+                <View style={{ flex: 1 }}>
+                    <View style={{ marginTop: "auto" }}>
+                        <View style={{ height: 60 }}>
+                            <View style={{
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                alignItems: "center"
+                            }}>
+                                <View style={styles.trackTitleContainer}>
+                                    <MovingText text={activeTrack.title ?? ""} style={styles.trackTitleText} animationThreshold={30} />
+                                </View>
+                                <FontAwesome
+                                    name={isFavorite ? "heart" : "heart-o"}
+                                    size={20}
+                                    color={isFavorite ? colors.primary : colors.icon}
+                                    style={{ marginHorizontal: 14 }}
+                                    onPress={toggleFavorite} />
+                            </View>
+                            {activeTrack.artist && (
+                                <Text numberOfLines={1} style={[styles.artckArtistText, { marginTop: 6 }]}>{activeTrack.artist}</Text>
+                            )}
+                        </View>
+                        <PlayerProgressBar style={{ marginTop: 32 }} />
+                        <PlayerControls style={{ marginTop: 40 }} />
+                    </View>
+                    <PlayerVolumeBar style={{ marginTop: "auto", marginBottom: 30 }} />
+                    <View style={utilsStyles.centeredRow}>
+                        <PlayerRepeatToggle size={30} style={{ marginBottom: 6 }} />
+                    </View>
                 </View>
             </View>
         </View>
-    </View>
+    </LinearGradient>
 }
 
 const DismissPlayerSymbol = () => {

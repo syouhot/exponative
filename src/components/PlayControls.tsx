@@ -16,7 +16,7 @@ export function PlayerControls({ style }: PlayControlsProps) {
   return <View style={[styles.container, style]}>
     <View style={ styles.row}>
       <SkipToPreviousButton />
-      <PlayPauseButton />
+      <PlayPauseButton iconSize={40}/>
       <SkipToNextButton />
     </View>
   </View>

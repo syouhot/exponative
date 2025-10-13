@@ -2,7 +2,7 @@ import { colors, fontSize } from "@/constants/theme";
 import { useGlobalContext } from "@/context";
 import { formatSecondToMinute } from "@/helper";
 import { defaultStyle, utilsStyles } from "@/styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ViewProps } from "react-native";
 import { Slider } from "react-native-awesome-slider";
 import { useSharedValue } from "react-native-reanimated";
@@ -15,13 +15,15 @@ export default function PlayerProgressBar({ style }: ViewProps) {
     const [trackElapsedTime, setTrackElapsedTime] = useState("0")
     const [trackRemainingTime, setTrackRemainingTime] = useState("0")
 
-    if (status?.duration) {
-        setTrackElapsedTime(formatSecondToMinute(status.currentTime))
-        setTrackRemainingTime(formatSecondToMinute(status.duration - status.currentTime))
-    }
-    if (!isSliding.value && status?.duration) {
-        progress.value = status?.duration > 0 ? status.duration / status.currentTime : 0
-    }
+    useEffect(()=>{
+        if (status?.duration) {
+            setTrackElapsedTime(formatSecondToMinute(status.currentTime))
+            setTrackRemainingTime(formatSecondToMinute(status.duration - status.currentTime))
+        }
+        if (!isSliding.value && status?.duration) {
+            progress.value = status?.duration > 0 ? status.currentTime / status.duration  : 0
+        }
+    },[status?.currentTime,status?.duration,isSliding.value])
     return <View style={style}>
         <Slider progress={progress} minimumValue={min} maximumValue={max} theme={{
             maximumTrackTintColor: colors.maximumTrackTintColor,
