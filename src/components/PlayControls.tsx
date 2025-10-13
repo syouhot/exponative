@@ -1,8 +1,8 @@
 import library from "@/assets/data/library.json"
 import { colors } from "@/constants/theme"
 import { useGlobalContext } from "@/context"
-import { FontAwesome, FontAwesome6 } from "@expo/vector-icons"
-import { TouchableOpacity, View, ViewStyle } from "react-native"
+import { FontAwesome6 } from "@expo/vector-icons"
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native"
 import { Track } from "./TrackListItem"
 type PlayControlsProps = {
   style?: ViewStyle
@@ -11,16 +11,28 @@ type PlayerButtonProps = {
   style?: ViewStyle
   iconSize?: number
 }
+
+export function PlayerControls({ style }: PlayControlsProps) {
+  return <View style={[styles.container, style]}>
+    <View style={ styles.row}>
+      <SkipToPreviousButton />
+      <PlayPauseButton />
+      <SkipToNextButton />
+    </View>
+  </View>
+
+}
+
 export function PlayPauseButton({ style, iconSize }: PlayerButtonProps) {
   const { player, status } = useGlobalContext()
 
   const handlerPlay = async () => {
-    player?.playing ?await player?.pause() :await player?.play()
+    player?.playing ? await player?.pause() : await player?.play()
   }
   return (
     <View style={[{ height: iconSize }, style]}>
       <TouchableOpacity activeOpacity={0.85} onPress={handlerPlay}>
-        <FontAwesome name={status?.playing ? 'pause' : 'play'} size={iconSize} color={colors.text} />
+        <FontAwesome6 name={status?.playing ? 'pause' : 'play'} size={iconSize} color={colors.text} />
       </TouchableOpacity>
     </View>
   )
@@ -60,3 +72,15 @@ export function SkipToPreviousButton({ iconSize = 30 }: PlayerButtonProps) {
     </TouchableOpacity>
   )
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    width:"100%"
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center"
+  }
+})

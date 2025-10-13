@@ -28,7 +28,7 @@ export default function TabsNavigation() {
         borderTopRightRadius: 20,
         borderTopWidth: 0,
         paddingTop: 8,
-        height: 70,
+        height: 80,
       },
       tabBarBackground: () => <BlurView intensity={40} style={{
         ...StyleSheet.absoluteFillObject,
@@ -68,7 +68,7 @@ export default function TabsNavigation() {
       position: "absolute",
       left: 8,
       right: 8,
-      bottom: 70,
+      bottom: 80,
     }} />
   </>
 }

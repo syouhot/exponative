@@ -3,23 +3,32 @@ import { useGlobalContext } from "@/context"
 import useLastActiveTrack from "@/hooks/useLastActiveTrack"
 import { defaultStyle } from "@/styles"
 import { Image } from "expo-image"
-import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from "react-native"
+import { useRouter } from "expo-router"
+import { StyleSheet, TouchableOpacity, View, ViewProps } from "react-native"
+import MovingText from "./MovingText"
 import { PlayPauseButton, SkipToNextButton } from "./PlayControls"
 
 export default function FloatingPlayer({ style }: ViewProps) {
+    const router = useRouter()
     const { activeTrack } = useGlobalContext()
     const lastActiveTrack = useLastActiveTrack()
     const displayedTrack = activeTrack ?? lastActiveTrack
-    if (!activeTrack) return null
+    const handlePress = () => { 
+        router.navigate("/player")
+    }
+    if (!displayedTrack) return null
     return (
-        <TouchableOpacity activeOpacity={0.9} style={[styles.container, style]}>
+        <TouchableOpacity activeOpacity={0.9} style={[styles.container, style]} onPress={handlePress}>
             <>
                 <Image
                     source={displayedTrack?.artwork ?? unknownTrackImageUri}
                     style={styles.trackArtworkImage}
                 />
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{displayedTrack?.title}</Text>
+                    <MovingText
+                        text={displayedTrack?.title ?? ""}
+                        animationThreshold={25}
+                        style={styles.title} />
                 </View>
                 <View style={styles.controlsContainer}>
                     <PlayPauseButton iconSize={24} />

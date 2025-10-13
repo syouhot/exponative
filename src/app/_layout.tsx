@@ -2,6 +2,7 @@ import ContextProvider from '@/context';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -15,8 +16,10 @@ const App = () => {
 
   return <SafeAreaProvider>
     <ContextProvider>
-      <RootNavigation />
-      <StatusBar style='light' />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <RootNavigation />
+        <StatusBar style='light' />
+      </GestureHandlerRootView>
     </ContextProvider>
   </SafeAreaProvider>
 }
@@ -25,6 +28,14 @@ const App = () => {
 const RootNavigation = () => {
   return <Stack>
     <Stack.Screen name="(tabs)" options={{ headerShown: false, headerTitleAlign: "center" }} />
+    <Stack.Screen name="player"  options={{
+      headerShown: false,
+      headerTitleAlign: "center",
+      presentation: "card",
+      gestureEnabled: true,
+      gestureDirection: "vertical",
+      animationDuration:400,
+    }} />
   </Stack>
 }
 
