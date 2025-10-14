@@ -18,13 +18,10 @@ export default function FloatingPlayer({ style }: ViewProps) {
         router.navigate("/player")
     }
     useEffect(() => { 
-        console.log(111,status?.didJustFinish);
-        
-
         if (status?.didJustFinish) {
             const trackIndex = trackList.findIndex(track => track.url === activeTrack?.url)
-            if (trackIndex === -1 ||trackIndex+1 ==trackList.length) return
-            const nextTrack = trackList[trackIndex+1]
+            if (trackIndex === -1) return
+            const nextTrack =trackIndex+1 == trackList.length?trackList[0]:trackList[trackIndex+1];
             player?.replace(nextTrack.url)
             player?.play()
             setActiveTrack(nextTrack)

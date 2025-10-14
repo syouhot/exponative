@@ -32,7 +32,7 @@ export default function PlayerVolumeBar({ style }: ViewProps) {
                 thumbWidth={0}
                 renderBubble={() => null}
                 onValueChange={(value) => {
-                    updateVolume(value)
+                   updateVolume(value)
                 }}
             />
 

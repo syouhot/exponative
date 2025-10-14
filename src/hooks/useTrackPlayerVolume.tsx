@@ -13,10 +13,12 @@ export default function useTrackPlayerVolume() {
         if (newVolume < 0 || newVolume > 1) return
         setVolume(newVolume)
         if (player) {
-            player.volume = newVolume
+            player.volume = newVolume 
         }
 
     }, [])
+
+
     useEffect(() => {
         getVolume()
     }, [getVolume])
