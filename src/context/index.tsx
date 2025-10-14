@@ -8,7 +8,9 @@ type GlobalContext = {
     player: AudioPlayer | undefined
     setPlayer: (player: AudioPlayer | undefined) => void,
     status: AudioStatus | undefined,
-    setStatus: (status: AudioStatus | undefined) => void
+    setStatus: (status: AudioStatus | undefined) => void,
+    trackList: Track[]
+    setTrackList: (trackList: Track[]) => void
 }
 
 const context = React.createContext<GlobalContext>({
@@ -18,12 +20,15 @@ const context = React.createContext<GlobalContext>({
     setPlayer: () => { },
     status: undefined,
     setStatus: () => { },
+    trackList: [],
+    setTrackList: () => { }
 })
 export default function ContextProvider({ children }: { children: React.ReactNode }) {
     const [activeTrack, setActiveTrack] = useState<Track>()
     const [player, setPlayer] = useState<AudioPlayer>()
     const [status, setStatus] = useState<AudioStatus>()
-    return <context.Provider value={{ activeTrack, setActiveTrack, player, setPlayer, status, setStatus }}>
+    const [trackList, setTrackList] = useState<Track[]>([])
+    return <context.Provider value={{ activeTrack, setActiveTrack, player, setPlayer, status, setStatus, trackList, setTrackList }}>
         {children}
     </context.Provider>
 }

@@ -6,7 +6,8 @@ import { AndroidImageColors, IOSImageColors } from "react-native-image-colors/bu
 export default function usePlayerBackground(imageUrl: string) {
     const [imageColors, setImageColors] = useState<IOSImageColors | AndroidImageColors|null>(null)
 
-    useEffect(()=>{
+    useEffect(() => {
+        if(!imageUrl) return
         getColors(imageUrl,{
             fallback:colors.background,
             cache:true,

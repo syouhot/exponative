@@ -4,18 +4,35 @@ import useLastActiveTrack from "@/hooks/useLastActiveTrack"
 import { defaultStyle } from "@/styles"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router"
+import { useEffect } from "react"
 import { StyleSheet, TouchableOpacity, View, ViewProps } from "react-native"
 import MovingText from "./MovingText"
 import { PlayPauseButton, SkipToNextButton } from "./PlayControls"
 
 export default function FloatingPlayer({ style }: ViewProps) {
     const router = useRouter()
-    const { activeTrack } = useGlobalContext()
+    const { activeTrack, setActiveTrack, player, status, trackList } = useGlobalContext()
     const lastActiveTrack = useLastActiveTrack()
     const displayedTrack = activeTrack ?? lastActiveTrack
     const handlePress = () => { 
         router.navigate("/player")
     }
+    useEffect(() => { 
+        console.log(111,status?.didJustFinish);
+        
+
+        if (status?.didJustFinish) {
+            const trackIndex = trackList.findIndex(track => track.url === activeTrack?.url)
+            if (trackIndex === -1 ||trackIndex+1 ==trackList.length) return
+            const nextTrack = trackList[trackIndex+1]
+            player?.replace(nextTrack.url)
+            player?.play()
+            setActiveTrack(nextTrack)
+        }
+
+
+        
+    },[status?.didJustFinish])
     if (!displayedTrack) return null
     return (
         <TouchableOpacity activeOpacity={0.9} style={[styles.container, style]} onPress={handlePress}>
