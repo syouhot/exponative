@@ -11,7 +11,8 @@ import { defaultStyle, utilsStyles } from "@/styles";
 import { FontAwesome } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Platform, StyleSheet, Text, View } from "react-native";
+import { AndroidImageColors, IOSImageColors } from "react-native-image-colors/build/types";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function PlayerScreen() {
@@ -19,6 +20,16 @@ export default function PlayerScreen() {
     const { top, bottom } = useSafeAreaInsets()
     const { imageColors } = usePlayerBackground(activeTrack?.artwork ?? unknownTrackImageUri)
     const isFavorite = false
+
+    const selectPlatformColors = (colors: IOSImageColors | AndroidImageColors) => {
+        if (Platform.OS === "ios") {
+            let color: IOSImageColors = colors as IOSImageColors
+            return [color.background, color.primary] as [string, string]
+        } else {
+            let color: AndroidImageColors = colors as AndroidImageColors
+            return [color.dominant, color.average] as [string, string]
+        }
+    }
 
     const toggleFavorite = () => {
 
@@ -29,7 +40,9 @@ export default function PlayerScreen() {
         </View>
     }
 
-    return <LinearGradient style={{ flex: 1 }} colors={imageColors ? [imageColors.background, imageColors.primary] : [colors.background, colors.background]}>
+    return <LinearGradient style={{ flex: 1 }} colors={imageColors ?
+        selectPlatformColors(imageColors) :
+        [colors.background, colors.background]}>
         <View style={styles.overlayContainer}>
             <DismissPlayerSymbol />
             <View style={{ flex: 1, marginTop: top + 70, marginBottom: bottom + 20 }}>

@@ -36,9 +36,9 @@ export default function SongsScreen() {
         </ScrollView>
     )
     return <View style={defaultStyle.container}>
-        <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} />
         <ScrollView contentInsetAdjustmentBehavior="automatic"
             style={{ paddingHorizontal: screenPadding.horizontal }}>
+        <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} />
             <TracksList scrollEnabled={false} tracks={filteredTracks} />
         </ScrollView>
     </View>

@@ -1,5 +1,6 @@
 import { colors } from "@/constants/theme";
 import { useEffect, useState } from "react";
+import { Platform } from "react-native";
 import { getColors } from "react-native-image-colors";
 import { AndroidImageColors, IOSImageColors } from "react-native-image-colors/build/types";
 export default function usePlayerBackground(imageUrl: string) {
@@ -10,7 +11,7 @@ export default function usePlayerBackground(imageUrl: string) {
             fallback:colors.background,
             cache:true,
             key:imageUrl
-        }).then((colors)=>setImageColors(colors as IOSImageColors))
+        }).then((colors) => setImageColors(Platform.OS === "ios" ? colors as IOSImageColors:colors as AndroidImageColors))
     },[imageUrl])
 
     return {imageColors}
