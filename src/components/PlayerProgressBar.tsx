@@ -23,7 +23,8 @@ export default function PlayerProgressBar({ style }: ViewProps) {
         if (!isSliding.value && status?.duration) {
             progress.value = status?.duration > 0 ? status.currentTime / status.duration  : 0
         }
-    },[status?.currentTime,status?.duration,isSliding.value])
+    }, [status?.currentTime, status?.duration])
+    //这里不能把isSliding.value 放到useEffect中，因为useEffect的依赖项中不能包含useSharedValue
     return <View style={style}>
         <Slider progress={progress} minimumValue={min} maximumValue={max} theme={{
             maximumTrackTintColor: colors.maximumTrackTintColor,

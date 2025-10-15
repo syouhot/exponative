@@ -2,6 +2,7 @@ import { colors } from "@/constants/theme";
 import useTrackPlayerVolume from "@/hooks/useTrackPlayerVolume";
 import { utilsStyles } from "@/styles";
 import { Ionicons } from "@expo/vector-icons";
+import { useEffect } from "react";
 import { View, ViewProps } from "react-native";
 import { Slider } from "react-native-awesome-slider";
 import { useSharedValue } from "react-native-reanimated";
@@ -14,7 +15,9 @@ export default function PlayerVolumeBar({ style }: ViewProps) {
     const min = useSharedValue(0)
     const max = useSharedValue(1)
 
-    progress.value = volume ?? 0
+    useEffect(()=>{
+        progress.value = volume ?? 0
+    },[volume])
 
     return <View style={style}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>

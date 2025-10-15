@@ -1,7 +1,7 @@
 import SearchIndex from '@/app/search';
 import TracksList from "@/components/TracksList";
 import { screenPadding } from '@/constants/theme';
-import { trackTitleFilter } from '@/helper';
+import { generateTracksListId, trackTitleFilter } from '@/helper';
 import { useFavorites } from '@/store/library';
 import { defaultStyle } from "@/styles";
 import { useMemo, useState } from 'react';
@@ -22,14 +22,14 @@ export default function FavoritesScreen() {
     if (Platform.OS === "ios") return <ScrollView contentInsetAdjustmentBehavior="automatic"
         style={[{ paddingHorizontal: screenPadding.horizontal }, defaultStyle.container]}>
         <SearchIndex searchValue={searchValue} setSearchValue={(v) => setSearchValue(v)} />
-        <TracksList tracks={filteredFavoritesTracks} scrollEnabled={false} />
+        <TracksList tracks={filteredFavoritesTracks} scrollEnabled={false} id={generateTracksListId("favorites", searchValue)}/>
     </ScrollView>
 
     return <View style={defaultStyle.container}>
         <SearchIndex searchValue={searchValue} setSearchValue={(v) => setSearchValue(v)} />
         <ScrollView contentInsetAdjustmentBehavior="automatic"
             style={{ paddingHorizontal: screenPadding.horizontal }}>
-            <TracksList tracks={filteredFavoritesTracks} scrollEnabled={false} />
+            <TracksList tracks={filteredFavoritesTracks} scrollEnabled={false} id={generateTracksListId("favorites", searchValue)} />
         </ScrollView>
     </View >
 

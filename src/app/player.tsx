@@ -47,7 +47,7 @@ export default function PlayerScreen() {
             <DismissPlayerSymbol />
             <View style={{ flex: 1, marginTop: top + 70, marginBottom: bottom + 20 }}>
                 <View style={styles.artworkImageContainer}>
-                    <Image source={activeTrack.artwork ?? unknownTrackImageUri} style={styles.artworkImage} />
+                    <Image source={activeTrack.artwork ?? unknownTrackImageUri} style={styles.artworkImage} onError={() => { }} />
                 </View>
                 <View style={{ flex: 1 }}>
                     <View style={{ marginTop: "auto" }}>

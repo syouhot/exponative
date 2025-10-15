@@ -3,7 +3,7 @@ import { Track } from "@/components/TrackListItem";
 import TracksList from "@/components/TracksList";
 import { screenPadding } from "@/constants/theme";
 import { useGlobalContext } from "@/context";
-import { trackTitleFilter } from "@/helper";
+import { generateTracksListId, trackTitleFilter } from "@/helper";
 import { useTracks } from "@/store/library";
 import { defaultStyle } from "@/styles";
 import { useAudioPlayer, useAudioPlayerStatus } from "expo-audio";
@@ -40,7 +40,7 @@ export default function SongsScreen() {
         <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} />
         <ScrollView contentInsetAdjustmentBehavior="automatic"
             style={{ paddingHorizontal: screenPadding.horizontal }}>
-            <TracksList scrollEnabled={false} tracks={filteredTracks} id="song"/>
+            <TracksList scrollEnabled={false} tracks={filteredTracks} id={generateTracksListId("songs", searchValue)} />
         </ScrollView>
     </View>
 } 
