@@ -21,13 +21,13 @@ const ItemDivider = () => (
 export default function TracksList({ id, tracks, ...flatlistProps }: TrackListProps) {
   const queueOffset = useRef(0)
   const { activedQueueId, setActiveQueueId } = useQueue()
-  const { player, setPlayer ,trackList,setTrackList} = useGlobalContext()
+  const { player, setPlayer, trackList, setTrackList } = useGlobalContext()
   const handleTrackSelect = async (selectTrack: Track) => {
     const trackIndex = tracks.findIndex(track => track.url === selectTrack.url)
     if (trackIndex === -1) return
 
     const isChangingQueue = id! == activedQueueId
-    if(trackList.length<=0 && player){
+    if (trackList.length <= 0 && player) {
       player.volume = 0.5
     }
     setTrackList(tracks)

@@ -9,7 +9,6 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import Loaderkit from 'react-native-loader-kit'
 
 export type Track = {
-    id: string
     title: string
     url: string
     artist?: string;
