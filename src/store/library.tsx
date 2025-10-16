@@ -1,6 +1,7 @@
 import library from "@/assets/data/library.json";
 import { Track } from "@/components/TrackListItem";
-import { Artist, TrackWithPaylist } from "@/helper/type";
+import { unknownTrackImageUri } from "@/constants/images";
+import { Artist, Playlist, TrackWithPaylist } from "@/helper/type";
 import { create } from "zustand";
 
 interface LibraryState {
@@ -45,4 +46,26 @@ export const useArtists = () => {
     }, [] as Artist[])
 
     return result
+}
+
+export const usePlaylist = () => {
+    const playlist = useLibraryStore(state => state.tracks)
+    const playlists = playlist.reduce((acc, track) => {
+        track.playlist?.forEach(playlistName => {
+            const existingPlaylist = acc.find((playlist) => playlist.name === playlistName)
+            if (existingPlaylist) {
+                existingPlaylist.tracks.push(track)
+            } else {
+                acc.push({
+                    name: playlistName ?? "unknown",
+                    tracks: [track],
+                    artworkPreview: track.artwork ?? unknownTrackImageUri
+                })
+            }
+        })
+        return acc
+    },[] as Playlist[])
+
+    const addToPlaylist = useLibraryStore((state) => state.addToPlaylist)
+    return {playlists}
 }

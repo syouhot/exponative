@@ -28,8 +28,8 @@ export default function SongsScreen() {
         return tracks.filter(trackTitleFilter(searchValue))
     }, [searchValue, tracks])
     if (Platform.OS === "ios") return (
-        <ScrollView style={defaultStyle.container} contentInsetAdjustmentBehavior="automatic">
-            <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} />
+        <ScrollView style={[defaultStyle.container,{padding:10}]} contentInsetAdjustmentBehavior="automatic">
+            <SearchIndex searchValue={searchValue} setSearchValue={setSearchValueHander} style={{width:"100%"}}/>
             {/* <View
                 style={{ paddingHorizontal: screenPadding.horizontal }}>
             </View> */}

@@ -21,7 +21,7 @@ export default function FavoritesScreen() {
     }, [searchValue, favoritesTracks])
     if (Platform.OS === "ios") return <ScrollView contentInsetAdjustmentBehavior="automatic"
         style={[{ paddingHorizontal: screenPadding.horizontal }, defaultStyle.container]}>
-        <SearchIndex searchValue={searchValue} setSearchValue={(v) => setSearchValue(v)} />
+        <SearchIndex searchValue={searchValue} setSearchValue={(v) => setSearchValue(v)} style={{width:"100%"}}/>
         <TracksList tracks={filteredFavoritesTracks} scrollEnabled={false} id={generateTracksListId("favorites", searchValue)}/>
     </ScrollView>
 

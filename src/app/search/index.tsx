@@ -1,5 +1,5 @@
 import Feather from '@expo/vector-icons/Feather';
-import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View, ViewProps } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -38,11 +38,14 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
 })
-
-export default function SearchIndex({ searchValue, setSearchValue }: { searchValue: string, setSearchValue: (v: string) => void }) {
+interface searchProp extends ViewProps{
+  searchValue:string,
+  setSearchValue:(v:string) => void,
+}
+export default function SearchIndex({ searchValue, setSearchValue ,style}: searchProp) {
   return (
-    <View style={styles.container}>
-      <View style={styles.searchView}>
+    <View style={styles.container} >
+      <View style={[styles.searchView,style]}>
         <Feather name="search" size={20} color="#89898d" style={styles.icon} />
         <TextInput
           style={styles.searchInput}

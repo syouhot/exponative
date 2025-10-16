@@ -23,8 +23,8 @@ export default function ArtistsScreen() {
         return artists
     }, [searchValue])
     if (Platform.OS === "ios") return (
-        <ScrollView style={defaultStyle.container}>
-            <SearchIndex searchValue={searchValue} setSearchValue={setSearchValue} />
+        <ScrollView style={[defaultStyle.container,{padding:10}]} contentInsetAdjustmentBehavior="automatic">
+            <SearchIndex searchValue={searchValue} setSearchValue={setSearchValue} style={{width:"100%"}}/>
             <FlatList
                 data={filteredArtists}
                 scrollEnabled={false}

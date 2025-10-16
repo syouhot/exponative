@@ -1,10 +1,13 @@
-import { Artist } from "./type"
+import { Artist, Playlist } from "./type"
 
 export const trackTitleFilter = (title: string) => (track: any) => {
     return track.title?.toLowerCase().includes(title.toLowerCase())
 }
 export const artistsNameFilter = (name: string) => (artist: Artist) => {
     return artist.name?.toLowerCase().includes(name.toLowerCase())
+}
+export const playlistsNameFilter = (name: string) => (playlist: Playlist) => {
+    return playlist.name?.toLowerCase().includes(name.toLowerCase())
 }
 
 export const formatSecondToMinute = (seconds: number) => {
