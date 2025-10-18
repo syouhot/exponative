@@ -7,6 +7,8 @@ import { Image } from 'expo-image'
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import Loaderkit from 'react-native-loader-kit'
+import StopPropagation from './StopPropagation'
+import TrackShortcutsMenu from './TrackShortcutsMenu'
 
 export type Track = {
     title: string
@@ -43,9 +45,9 @@ export default function TrackListItem({ track, onTrackSelect }: TrackListItemPro
                                 opacity: isActiveTrack ? 0.6 : 1
                             }}
                             onError={() => { }}
-                            />
+                        />
                         {isActiveTrack && (status?.playing ?
-                            <Loaderkit name='LineScaleParty' color={colors.icon} style={ styles.trackPlayingIconIndicator} /> :
+                            <Loaderkit name='LineScaleParty' color={colors.icon} style={styles.trackPlayingIconIndicator} /> :
                             <Ionicons name='play' size={24} color={colors.icon} style={styles.trackPausedIndicator} />
                         )}
                     </View>
@@ -57,7 +59,11 @@ export default function TrackListItem({ track, onTrackSelect }: TrackListItemPro
                             }}>{track.title}</Text>
                             {track.artist && <Text numberOfLines={1} style={styles.trackArtistText}>{track.artist}</Text>}
                         </View>
-                        <Entypo name='dots-three-horizontal' size={18} color={colors.icon} />
+                        <StopPropagation>
+                            <TrackShortcutsMenu track={track}>
+                                <Entypo name='dots-three-horizontal' size={18} color={colors.icon} />
+                            </TrackShortcutsMenu>
+                        </StopPropagation>
                     </View>
                 </View>
             </View>
@@ -89,14 +95,14 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         columnGap: 14
     },
-    trackPlayingIconIndicator:{
+    trackPlayingIconIndicator: {
         position: 'absolute',
         top: 18,
         left: 16,
         height: 16,
-        width:16
+        width: 16
     },
-    trackPausedIndicator:{
+    trackPausedIndicator: {
         position: 'absolute',
         top: 14,
         left: 14,

@@ -4,6 +4,7 @@ const setupPlayer = async () => {
 }
 export default function useSetupTrackPlayer({ onLoad }: { onLoad?: () => void }) {
   const isInitialized = useRef(false)
+  //这里功能不完全
   useEffect(() => {
       try {
         setupPlayer().then(() => {

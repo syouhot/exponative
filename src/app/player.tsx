@@ -3,6 +3,7 @@ import { PlayerControls } from "@/components/PlayControls";
 import PlayerProgressBar from "@/components/PlayerProgressBar";
 import PlayerRepeatToggle from "@/components/PlayerRepeatToggle";
 import PlayerVolumeBar from "@/components/PlayerVolumeBar";
+import useTrackPlayerFavorite from "@/components/useTrackPlayerFavorite";
 import { unknownTrackImageUri } from "@/constants/images";
 import { colors, fontSize, screenPadding } from "@/constants/theme";
 import { useGlobalContext } from "@/context";
@@ -19,8 +20,6 @@ export default function PlayerScreen() {
     const { activeTrack } = useGlobalContext()
     const { top, bottom } = useSafeAreaInsets()
     const { imageColors } = usePlayerBackground(activeTrack?.artwork ?? unknownTrackImageUri)
-    const isFavorite = false
-
     const selectPlatformColors = (colors: IOSImageColors | AndroidImageColors) => {
         if (Platform.OS === "ios") {
             let color: IOSImageColors = colors as IOSImageColors
@@ -31,9 +30,7 @@ export default function PlayerScreen() {
         }
     }
 
-    const toggleFavorite = () => {
-
-    }
+    const { toggleFavorite, isFavorite} = useTrackPlayerFavorite()
     if (!activeTrack) {
         return <View style={[defaultStyle.container, { justifyContent: "center" }]}>
             <ActivityIndicator color={colors.icon} />

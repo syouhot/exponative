@@ -1,3 +1,4 @@
+import { colors } from '@/constants/theme';
 import ContextProvider from '@/context';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -35,6 +36,17 @@ const RootNavigation = () => {
       gestureEnabled: true,
       gestureDirection: "vertical",
       animationDuration:400,
+    }} />
+    <Stack.Screen name="(modals)/addToPlaylist" options={{
+      headerTitleAlign: "center",
+      presentation: "modal",
+      headerStyle: {
+        backgroundColor:colors.background,
+      },
+      headerTitle: "Add to playlist",
+      headerTitleStyle: {
+        color:colors.text
+      },
     }} />
   </Stack>
 }
